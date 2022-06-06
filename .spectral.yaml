@@ -1,0 +1,9 @@
+formats:
+  - oas2
+  - oas3
+  - oas3.1
+rules:
+  my-rule:
+    given: $
+    then:
+      function: truthy
