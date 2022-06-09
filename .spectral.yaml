@@ -1,9 +1,15 @@
+extends:
+  - spectral:oas
 formats:
   - oas2
   - oas3
   - oas3.1
 rules:
-  my-rule:
-    given: $
+  contact-url:
+    description: Contact URL field must exist.
+    formats: ["oas3"]
+    given: $.info.contact
+    severity: error
     then:
+      field: url
       function: truthy

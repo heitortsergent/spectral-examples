@@ -1,14 +1,16 @@
-const path = require("path");
-const fs = require("fs");
+import path from "path"
+import fs from "fs";
 
-const { Spectral, Doc } = require("@stoplight/spectral-core");
-const { spectralFetch } = require("@stoplight/spectral-runtime");
-const Parsers = require("@stoplight/spectral-parsers"); // make sure to install the package if you intend to use default parsers!
-const { truthy } = require("@stoplight/spectral-functions"); // this has to be installed as well
-const { oas } = require("@stoplight/spectral-rulesets");
-const { bundleAndLoadRuleset } = require("@stoplight/spectral-ruleset-bundler/with-loader");
+import { Spectral, Document } from "@stoplight/spectral-core";
+import { fetch } from "@stoplight/spectral-runtime";
+import Parsers from "@stoplight/spectral-parsers"; // make sure to install the package if you intend to use default parsers!
+import { truthy } from "@stoplight/spectral-functions"; // this has to be installed as well
+import { oas } from "@stoplight/spectral-rulesets";
+// import { bundleAndLoadRuleset } from "@stoplight/spectral-ruleset-bundler/with-loader";
+import spectralRulesetBundler from "@stoplight/spectral-ruleset-bundler/with-loader";
+const bundleAndLoadRuleset = spectralRulesetBundler.bundleRuleset;
 
-const myDocument = new Doc(
+const myDocument = new Document(
   `---
 responses:
   '200':
@@ -19,7 +21,7 @@ responses:
 
 const spectral = new Spectral();
 const rulesetFilepath = path.join(__dirname, "ruleset.yaml");
-spectral.setRuleset(await bundleAndLoadRuleset(rulesetFilepath, { fs, spectralFetch }));
+spectral.setRuleset(await bundleAndLoadRuleset(rulesetFilepath, { fs, fetch }));
 spectral.run(myDocument).then(console.log);
 
 export {}

@@ -9,6 +9,6 @@
   },
   "scripts": {
     "build": "tsc",
-    "start": "node ./load-rulesets.js"
+    "start": "node ./example-1.mjs"
   }
 }

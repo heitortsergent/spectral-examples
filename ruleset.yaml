@@ -1,11 +1,11 @@
-formats:
-  - oas2
-  - oas3.1
-functions:
-  - pascalCase
-  - oas3
+extends:
+  - spectral:oas
 rules:
-  my-rule:
-    given: $
+  contact-email:
+    description: Contact email field must exist.
+    formats: ["oas3"]
+    given: $.info.contact
+    severity: error
     then:
+      field: email
       function: truthy
